@@ -1,0 +1,33 @@
+{
+  "name": "semeyniy-ezh-coffee",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.18.0" },
+  "scripts": {
+    "open": "node server/launch.mjs",
+    "dev": "node server/index.mjs --dev",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "start": "node server/index.mjs",
+    "preview": "node server/index.mjs",
+    "pretest": "npm run build",
+    "test": "node --test --test-concurrency=1 tests/*.test.mjs",
+    "bookings": "node server/list-bookings.mjs",
+    "booking:status": "node server/manage-bookings.mjs",
+    "admin:init": "node server/admin-init.mjs",
+    "ops": "node server/ops.mjs",
+    "backup": "node server/ops.mjs backup",
+    "restore": "node server/ops.mjs restore",
+    "db:verify": "node server/ops.mjs verify",
+    "retention": "node server/ops.mjs purge",
+    "health": "node server/ops.mjs health",
+    "test:browser": "node qa/run.mjs",
+    "pretest:admin": "npm run build",
+    "test:admin": "node --test --test-concurrency=1 qa/admin.mjs qa/audit-fixes.mjs"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "^7.3.0"
+  }
+}

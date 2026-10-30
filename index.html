@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script data-file-entry>
+      if (location.protocol === 'file:') {
+        var entry = /\/dist\/index\.html$/i.test(location.pathname) ? '../open-site.html' : './open-site.html';
+        location.replace(new URL(entry, location.href).href);
+      }
+    </script>
+    <meta name="theme-color" content="#d5b395" />
+    <meta name="description" content="Семейный Ёж — уютная кофейня для медленного утра, любимого кофе и встреч. Посмотрите меню, загляните в гости и оставьте заявку на столик." />
+    <meta property="og:title" content="Семейный Ёж — кофе и немного тепла" />
+    <meta property="og:description" content="Место, где можно не спешить. Любимый кофе, тёплые встречи и уютный столик для вас." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:image" content="/images/cafe-interior.webp" />
+    <link rel="canonical" href="/" vite-ignore />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href="/images/coffee-hero.webp" fetchpriority="high" imagesrcset="/images/coffee-hero-320.webp 320w, /images/coffee-hero-480.webp 480w, /images/coffee-hero-640.webp 640w, /images/coffee-hero.webp 800w" imagesizes="(max-width: 360px) 177px, (max-width: 760px) 194px, (max-width: 1100px) 350px, (max-width: 1410px) 29.64vw, 418px" />
+    <title>Семейный Ёж — кофе и немного тепла</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#hero-title">Перейти к содержимому</a>
+    <main id="main">
+    <div class="hero-shell" id="top">
+      <header class="header container">
+        <a class="brand" href="#top">
+          <img class="brand-mark" src="/images/hedgehog.svg" width="52" height="52" alt="" />
+          <span>СЕМЕЙНЫЙ ЁЖ<small>кофейня рядом</small></span>
+        </a>
+        <nav class="desktop-nav" aria-label="Основная навигация"><a href="#menu">Меню</a><a href="#atmosphere">Атмосфера</a><a href="#contacts">В гости</a></nav>
+        <a class="header-book" href="#booking">Забронировать столик <span aria-hidden="true">↗</span></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Открыть меню"><span></span><span></span></button>
+        <nav class="mobile-nav" id="mobile-nav" aria-label="Мобильная навигация" hidden><a href="#menu">Меню</a><a href="#atmosphere">Атмосфера</a><a href="#contacts">В гости</a><a href="#booking">Забронировать столик</a></nav>
+      </header>
+        <section class="hero container" aria-labelledby="hero-title">
+          <div class="hero-stage">
+            <p class="hero-kicker">зайдите за</p>
+            <h1 id="hero-title" class="hero-word" aria-label="Зайдите за кофе" tabindex="-1"><span>КО</span><span>ФЕ</span></h1>
+            <img class="hero-cup" src="/images/coffee-hero.webp" srcset="/images/coffee-hero-320.webp 320w, /images/coffee-hero-480.webp 480w, /images/coffee-hero-640.webp 640w, /images/coffee-hero.webp 800w" sizes="(max-width: 360px) 177px, (max-width: 760px) 194px, (max-width: 1100px) 350px, (max-width: 1410px) 29.64vw, 418px" width="800" height="1200" alt="Фирменный стакан «Семейный Ёж» с кофейным всплеском и зёрнами" fetchpriority="high" />
+            <div class="hero-copy"><p>Хороший кофе.<br />Ваш темп.<br /><em>И немного тепла.</em></p><a class="button button-dark" href="#menu">Выбрать кофе <span aria-hidden="true">↗</span></a></div>
+            <span class="hero-side-note">кофе · люди · тёплые встречи</span>
+          </div>
+          <div class="hero-bottom"><span>Ежедневно · <span data-hours><!-- @hours --></span></span><a href="#booking">Столик для вас <span aria-hidden="true">↗</span></a><a href="#contacts" data-location><!-- @location --></a></div>
+          <div class="drink-rail" role="group" aria-label="Знакомые любимые напитки"><!-- @featured --></div>
+        </section>
+    </div>
+        <section class="menu-section section-pad" id="menu" aria-labelledby="menu-title">
+          <div class="container">
+            <div class="section-heading"><div><p class="section-label">Ваша чашка найдётся</p><h2 id="menu-title">На какой вы<br /><em>сегодня стороне?</em></h2></div><p class="section-intro">На стороне бодрого утра?<br />Или маленького десерта среди дня?<br />Выбирайте по вкусу. Мы подождём.</p></div>
+            <div class="taste-picker" role="group" aria-labelledby="taste-title">
+              <div class="taste-question"><img src="/images/hedgehog.svg" width="96" height="96" alt="" loading="lazy" /><div><p class="section-label">Ёж советует</p><h3 id="taste-title">Что вам сейчас ближе?</h3></div></div>
+              <div class="taste-options" role="group" aria-label="Подобрать кофе по вкусу"><button type="button" data-mood="soft" aria-pressed="true">Мягкий <span aria-hidden="true">☁</span></button><button type="button" data-mood="sweet" aria-pressed="false">Десертный <span aria-hidden="true">♡</span></button><button type="button" data-mood="fresh" aria-pressed="false">Освежающий <span aria-hidden="true">✳</span></button></div>
+              <div class="taste-result" id="taste-result" aria-live="polite" aria-atomic="true"><p>Нажмите на вкус — найдём вашу чашку.</p></div>
+            </div>
+            <div class="menu-heading"><h3>Меню без лишних слов</h3><p>Объём, состав и цена — всё перед вами.</p></div>
+            <div class="menu-filter" id="menu-filter" role="group" aria-label="Категории меню"><button type="button" data-category="all" aria-pressed="true">Всё меню</button><button type="button" data-category="coffee" aria-pressed="false">Классика</button><button type="button" data-category="signature" aria-pressed="false">Фирменный</button><button type="button" data-category="cold" aria-pressed="false">Со льдом</button><button type="button" data-category="no-coffee" aria-pressed="false">Без кофе</button></div>
+            <p class="sr-only" id="menu-count" role="status"></p>
+            <ul class="menu-list" id="menu-list"><!-- @menu --></ul>
+            <p class="menu-fine">Нажмите на напиток, чтобы узнать состав и аллергены. Растительное молоко и доступные замены уточните у бариста.</p>
+          </div>
+        </section>
+        <section class="atmosphere section-pad" id="atmosphere" aria-labelledby="atmosphere-title">
+          <div class="container">
+            <div class="section-heading"><div><p class="section-label">У каждого свой ритуал</p><h2 id="atmosphere-title">Место, где можно <br /><em>не спешить.</em></h2></div><p class="section-intro">У окна — для книги и чашки фильтра.<br />На диване — для разговоров подольше.<br />А кофе навынос — для вашего маршрута.</p></div>
+            <div class="gallery-grid">
+              <button class="gallery-item gallery-wide" type="button" data-gallery="0" aria-labelledby="gallery-wide-caption" aria-haspopup="dialog"><img src="/images/cafe-interior.webp" srcset="/images/cafe-interior-480.webp 480w, /images/cafe-interior-960.webp 960w, /images/cafe-interior.webp 1440w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1000px) calc(63vw - 56px), (max-width: 1392px) calc(63vw - 86px), 791px" width="1440" height="960" alt="Тёплый зал с деревянными столами, мягким диваном и солнечным светом" loading="lazy" /><span class="gallery-caption" id="gallery-wide-caption">Ваш маленький перерыв<span aria-hidden="true">↗</span></span></button>
+              <button class="gallery-item gallery-tall" type="button" data-gallery="1" aria-labelledby="gallery-tall-caption" aria-haspopup="dialog"><img src="/images/cappuccino.webp" srcset="/images/cappuccino-192.webp 192w, /images/cappuccino-320.webp 320w, /images/cappuccino-480.webp 480w, /images/cappuccino.webp 640w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1000px) calc(37vw - 33px), (max-width: 1392px) calc(37vw - 50px), 465px" width="512" height="512" alt="Капучино с сердечком на молочной пене на деревянном столе" loading="lazy" /><span class="gallery-caption" id="gallery-tall-caption">С любовью, в каждой чашке<span aria-hidden="true">↗</span></span></button>
+            </div>
+            <div class="atmosphere-foot"><p>Мы назвали кофейню «Семейный Ёж», потому что<br />даже колючему дню иногда нужна мягкая сторона.</p><a class="text-link" href="#booking">Найдём вам уютный уголок <span aria-hidden="true">↗</span></a></div>
+          </div>
+        </section>
+        <section class="booking-section section-pad" id="booking" aria-labelledby="booking-title">
+          <div class="container booking-grid">
+            <div class="booking-story"><p class="section-label">План на хороший день</p><h2 id="booking-title">Оставим для вас <br /><em>уютное место.</em></h2><p>Приходите вдвоём или целой компанией. <br />Оставьте заявку, а мы перезвоним <br />и договоримся о деталях.</p><div class="booking-note"><svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 7h15v12a7.5 7.5 0 0 1-15 0Zm15 2h3a4 4 0 0 1 0 8h-3M5 29h22M12 2v2m6-2v2"/></svg><span>Столик, кофе и немного тепла. <br />Всё остальное подождёт.</span></div></div>
+            <form class="booking-form" id="booking-form" method="post" action="/api/bookings" novalidate>
+              <noscript><p class="form-fine">Для отправки заявки включите JavaScript. Сведения из формы сейчас не отправляются.</p></noscript>
+              <div id="booking-fields">
+              <h3>Давайте встретимся</h3><p class="form-intro" data-guest-limit>Заявка на столик</p>
+              <div class="form-fields">
+                <div class="field"><label for="name">Ваше имя</label><input id="name" name="name" type="text" autocomplete="given-name" placeholder="Как к вам обращаться?" required minlength="2" maxlength="80" aria-describedby="name-error" /><span class="field-error" id="name-error"></span></div>
+                <div class="field"><label for="phone">Телефон</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" required maxlength="24" aria-describedby="phone-error" /><span class="field-error" id="phone-error"></span></div>
+                <div class="field"><label for="date">Дата</label><input id="date" name="date" type="date" required aria-describedby="date-error" /><span class="field-error" id="date-error"></span></div>
+                <div class="field"><label for="time">Время</label><select id="time" name="time" required aria-describedby="time-error"><option value="">Выберите время</option></select><span class="field-error" id="time-error"></span></div>
+                <div class="field field-full"><label for="guests">Количество гостей</label><select id="guests" name="guests" aria-describedby="guests-error"></select><span class="field-error" id="guests-error"></span></div>
+              </div>
+              <details class="booking-comment"><summary>Добавить пожелание</summary><label for="comment">Пожелание к столику</label><textarea id="comment" name="comment" rows="2" maxlength="300" placeholder="Например, столик у окна" aria-describedby="comment-error"></textarea><span class="field-error" id="comment-error"></span></details>
+              <div class="honey" aria-hidden="true"><label for="website">Ваш сайт</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
+              <div class="consent"><input id="consent" name="consent" type="checkbox" required aria-describedby="consent-error" /><label for="consent">Согласен на обработку персональных данных для связи по заявке. <button class="inline-button" type="button" data-privacy>Подробнее</button></label></div><span class="field-error" id="consent-error"></span>
+              <button class="button button-dark submit-booking" type="submit" disabled><span>Отправить заявку</span><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+              <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+              <p class="form-fine">Столик будет забронирован после нашего звонка.</p>
+              </div>
+              <div class="booking-success" id="booking-success" hidden tabindex="-1"><span class="success-mark" aria-hidden="true">✓</span><h3>Скоро увидимся!</h3><p>Ваша заявка сохранена. <br />Мы свяжемся с вами для подтверждения столика.</p><p class="receipt" id="booking-receipt"></p><button class="button button-dark" id="another-booking" type="button">Оставить ещё одну заявку</button></div>
+            </form>
+          </div>
+        </section>
+        <section class="contacts section-pad" id="contacts" aria-labelledby="contacts-title">
+          <div class="container contacts-grid">
+            <div><p class="section-label">Кофейня по соседству</p><h2 id="contacts-title">Заглядывайте<br /><em>в гости.</em></h2>
+              <address><p class="contact-address" data-location><!-- @location --></p><p>Каждый день · <span data-hours><!-- @hours --></span></p><a data-phone href="tel:__PHONE_HREF__"><!-- @phone --></a></address>
+              <a class="button button-outline" data-directions href="__DIRECTIONS_URL__" target="_blank" rel="noopener noreferrer">Построить маршрут <span aria-hidden="true">↗</span></a>
+              <p class="demo-note">Демонстрационный проект: адрес, контакты и меню вымышлены; изображения созданы для концепции.</p>
+            </div>
+            <div class="map-wrap">
+              <div class="map-placeholder"><span class="map-pin" aria-hidden="true"></span><div><h3>Кофе уже рядом</h3><p data-location><!-- @location --></p></div><button class="button button-dark" type="button" data-load-map>Показать на карте</button><p id="map-status" role="status">Карта Google загрузится только после нажатия.</p></div>
+              <iframe id="cafe-map" title="Карта: пример расположения кофейни" referrerpolicy="no-referrer" hidden></iframe>
+              <div class="map-caption"><span data-location><!-- @location --></span><a data-directions href="__DIRECTIONS_URL__" target="_blank" rel="noopener noreferrer">Открыть карту ↗</a></div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer"><div class="container footer-main"><a class="brand footer-brand" href="#top"><span>СЕМЕЙНЫЙ ЁЖ<small>кофе и немного тепла</small></span></a><nav aria-label="Навигация в подвале"><a href="#menu">Меню</a><a href="#atmosphere">Атмосфера</a><a href="#booking">Столик для вас</a></nav><a class="back-top" href="#top" aria-label="Наверх"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V4m-6 6 6-6 6 6"/></svg></a></div><div class="container footer-bottom"><span>© <span id="year">2026</span> Семейный Ёж</span><button class="inline-button" type="button" data-privacy>Обработка персональных данных</button><span>Сделано с теплом</span></div></footer>
+      <nav class="mobile-actions" aria-label="Быстрые действия"><a href="#menu">Меню и цены</a><a href="#booking">Столик для вас <span aria-hidden="true">↗</span></a></nav>
+      <noscript><p class="noscript-note">Меню и контакты доступны без JavaScript. Для формы заявки и подбора напитка включите JavaScript.</p></noscript>
+      <dialog class="drink-dialog" id="drink-dialog" aria-labelledby="drink-title"><button class="dialog-close" type="button" data-close aria-label="Закрыть"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button><img id="drink-image" alt="" width="512" height="512" /><div class="drink-detail"><p class="section-label">Ваш маленький ритуал</p><h2 id="drink-title"></h2><p class="drink-price" id="drink-price"></p><p id="drink-description"></p><p class="drink-allergens" id="drink-allergens"></p><a class="button button-dark" href="#booking" id="drink-booking">Попробовать за столиком <span aria-hidden="true">↗</span></a></div></dialog>
+      <dialog class="lightbox" id="lightbox" aria-labelledby="lightbox-caption"><button class="dialog-close" type="button" data-close aria-label="Закрыть фото"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button><button class="gallery-prev gallery-control" type="button" aria-label="Предыдущее фото"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><figure><img id="lightbox-image" alt="" /><figcaption id="lightbox-caption"></figcaption></figure><button class="gallery-next gallery-control" type="button" aria-label="Следующее фото"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button></dialog>
+      <dialog class="privacy-dialog" id="privacy-dialog" aria-labelledby="privacy-title"><button class="dialog-close" type="button" data-close aria-label="Закрыть"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button><p class="section-label">О ваших данных</p><h2 id="privacy-title">С заботой о личном</h2><p>Форма передаёт имя, телефон, выбранные дату, время, количество гостей и необязательное пожелание на сервер этого сайта. Данные нужны для связи по заявке и хранятся в закрытой серверной базе, без публичного доступа. Если кофейня использует уведомления Telegram, эти сведения также передаются в её служебный чат через Telegram.</p><p>Без вашего согласия отправка невозможна. Данные формы не сохраняются в браузере. Встроенная карта обращается к Google Maps только после нажатия кнопки и подчиняется политике этого сервиса.</p><p><strong>Это демонстрационный проект вымышленной кофейни.</strong> Не вводите настоящие персональные данные. Перед публичным запуском владелец обязан указать действительного оператора данных, срок хранения, порядок отзыва согласия и контакт для обращений.</p><button class="button button-dark" type="button" data-close>Понятно</button></dialog>
+  </body>
+</html>
+

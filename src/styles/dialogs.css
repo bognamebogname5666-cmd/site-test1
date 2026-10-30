@@ -1,0 +1,34 @@
+dialog { color: var(--ink); background: var(--white); padding: 0; border: 0; border-radius: var(--radius); width: min(900px, calc(100% - 40px)); max-height: calc(100dvh - 48px); overflow: auto; box-shadow: 0 24px 80px #1d100c40; }
+dialog::backdrop { background: #211510b3; }
+.dialog-close { position: absolute; right: 12px; top: 12px; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: var(--white); color: var(--ink); z-index: 2; box-shadow: 0 1px 8px #58332c14; }
+.drink-dialog[open] { display: grid; grid-template-columns: 1fr 1.1fr; }
+.drink-dialog > img { width: 100%; height: 100%; min-height: 460px; }
+.drink-detail { padding: 48px 32px 32px; }
+.drink-detail h2 { font-size: 40px; margin-bottom: 16px; }
+.drink-detail > p:not(.section-label) { margin-block: 16px; font-size: 16px; line-height: 1.65; }
+.drink-detail .drink-price { font-size: 21px; font-weight: 500; }
+.drink-detail .drink-allergens { font-size: 14px; color: var(--ink-muted); border-top: 1px solid var(--line); padding-top: 16px; }
+.drink-detail .button { margin-top: 8px; }
+.drink-dialog-text[open] { display: block; max-width: 600px; }
+.lightbox { background: #201814; color: var(--white); width: min(1100px, calc(100% - 40px)); }
+.lightbox figure { margin: 0; }
+.lightbox figure img { max-height: calc(100dvh - 150px); width: 100%; object-fit: contain; }
+.lightbox figcaption { text-align: center; padding: 20px 60px; font-size: 15px; }
+.gallery-control { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; display: grid; place-items: center; background: var(--white); color: var(--ink); border-radius: 50%; }
+.gallery-prev { left: 12px; }
+.gallery-next { right: 12px; }
+.privacy-dialog { padding: 48px 40px 32px; max-width: 660px; }
+.privacy-dialog h2 { font-size: 36px; margin-bottom: 24px; }
+.privacy-dialog > p:not(.section-label) { margin-block: 20px; font-size: 15px; line-height: 1.7; }
+.privacy-dialog .button { margin-top: 8px; }
+@media (max-width: 760px) {
+  dialog { width: calc(100% - 24px); max-height: calc(100dvh - 24px); }
+  .drink-dialog[open] { display: block; }
+  .drink-dialog > img { height: 220px; min-height: 0; }
+  .drink-detail { padding: 28px 24px; }
+  .drink-detail h2 { font-size: 34px; }
+  .drink-dialog-text .drink-detail { padding-top: 64px; }
+  .privacy-dialog { padding: 60px 24px 28px; }
+  .lightbox { width: calc(100% - 16px); }
+  .lightbox figcaption { padding-inline: 48px; font-size: 14px; }
+}

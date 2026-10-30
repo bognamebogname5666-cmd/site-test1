@@ -1,0 +1,59 @@
+.menu-section { background: var(--paper); }
+.taste-picker { display: grid; grid-template-columns: 1fr 1.15fr; column-gap: 48px; background: #eaddc9; border: 1px solid #d9c6ac; padding: 32px; border-radius: var(--radius); margin-bottom: 56px; }
+.taste-question { grid-row: span 2; display: flex; gap: 16px; align-items: center; }
+.taste-question img { width: 104px; height: 104px; flex: none; }
+.taste-question .section-label { margin-bottom: 8px; }
+.taste-question h3 { font: 400 29px/1.2 var(--display); }
+.taste-options { display: flex; gap: 8px; padding-bottom: 24px; }
+.taste-options button { display: flex; gap: 10px; align-items: center; justify-content: center; min-height: 46px; flex: 1; padding: 10px 12px; font-size: 14px; background: transparent; border: 1px solid #b2997f; border-radius: 4px; }
+.taste-options button[aria-pressed=true] { color: var(--white); background: var(--ink); border-color: var(--ink); }
+.taste-options button:hover { border-color: var(--ink); }
+.taste-result { display: flex; align-items: start; justify-content: space-between; gap: 24px; border-top: 1px solid #b2997f; padding-top: 20px; min-height: 114px; }
+.taste-result h4 { font-size: 19px; font-weight: 500; margin-bottom: 8px; }
+.taste-result p { font-size: 14px; color: var(--ink-muted); max-width: 380px; }
+.taste-details { flex: none; background: transparent; padding: 8px 0; min-height: 44px; font-size: 15px; border-bottom: 1px solid currentColor; }
+.menu-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; }
+.menu-heading p { font-size: 14px; color: var(--ink-muted); }
+.menu-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-block: 24px; }
+.menu-filter button { border: 1px solid var(--line); border-radius: 100px; background: transparent; min-height: 44px; padding: 10px 20px; font-size: 14px; }
+.menu-filter button[aria-pressed=true] { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.menu-filter button:hover { border-color: var(--ink); }
+.menu-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; }
+.menu-item { border-bottom: 1px solid var(--line); }
+.menu-item button { width: 100%; min-height: 106px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; background: transparent; text-align: left; padding: 22px 4px; }
+.menu-item button:hover .menu-item-name { text-decoration: underline; text-underline-offset: 5px; }
+.menu-item-name { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 19px; font-weight: 500; }
+.menu-item-price { font-size: 19px; }
+.menu-item-notes, .menu-item-volume { font-size: 14px; color: var(--ink-muted); }
+.menu-item-volume { text-align: right; white-space: nowrap; }
+.menu-item-volume > span { padding-left: 12px; }
+.menu-badge { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; border: 1px solid #aa7c55; padding: 2px 7px; border-radius: 3px; }
+.menu-fine { margin-top: 24px; color: var(--ink-muted); font-size: 14px; max-width: 720px; }
+@media (max-width: 1100px) {
+  .taste-picker { grid-template-columns: 1fr 1.4fr; gap: 24px; padding: 24px; }
+  .taste-question { display: block; }
+  .taste-question img { width: 80px; height: 80px; margin-bottom: 8px; }
+  .taste-options { flex-wrap: wrap; }
+  .taste-result { flex-wrap: wrap; gap: 8px; }
+  .menu-list { column-gap: 32px; }
+}
+@media (max-width: 760px) {
+  .taste-picker { display: block; padding: 24px 20px; margin-bottom: 40px; }
+  .taste-question { display: flex; gap: 8px; margin-bottom: 20px; }
+  .taste-question img { width: 76px; height: 76px; margin: 0; }
+  .taste-question h3 { font-size: 25px; }
+  .taste-options { gap: 6px; padding-bottom: 20px; }
+  .taste-options button { padding-inline: 8px; gap: 5px; flex: 1 1 auto; }
+  .taste-options button span { display: none; }
+  .taste-result { min-height: 170px; display: block; }
+  .taste-details { margin-top: 10px; }
+  .menu-heading { display: block; }
+  .menu-heading h3 { font-size: 22px; }
+  .menu-heading p { margin-top: 8px; }
+  .menu-filter { gap: 6px; }
+  .menu-filter button { padding-inline: 14px; }
+  .menu-list { grid-template-columns: 1fr; }
+  .menu-item button { min-height: 100px; gap: 6px 12px; }
+  .menu-item-name, .menu-item-price { font-size: 18px; }
+  .menu-item-notes { font-size: 14px; }
+}

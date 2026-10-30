@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Открыть кофейню — Семейный Ёж</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;padding:28px;background:#d5b395;color:#58332c;font:16px/1.7 Arial,sans-serif}.panel{max-width:580px;background:#f7f2e9;padding:clamp(28px,7vw,60px);border-radius:8px}.brand{font:700 15px Georgia,serif;letter-spacing:1px;margin:0 0 40px}h1{font:400 clamp(36px,6vw,51px)/1.1 Georgia,serif;letter-spacing:-1px;margin:0 0 24px}p{margin:0 0 20px}code{font-size:15px;font-weight:700;white-space:nowrap}.button{display:inline-block;background:#58332c;color:#f7f2e9;text-decoration:none;padding:14px 24px;border-radius:4px;margin-top:8px}.hint{font-size:12px;color:#79675b;margin-top:26px;margin-bottom:0}a:focus-visible{outline:3px solid #a26036;outline-offset:5px}
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <p class="brand">СЕМЕЙНЫЙ ЁЖ</p>
+    <h1>Откройте кофейню</h1>
+    <p>В папке проекта дважды нажмите <code>START_SITE.cmd</code>. Он запустит сайт и автоматически откроет его в браузере.</p>
+    <a class="button" href="http://127.0.0.1:5173/">Перейти на сайт</a>
+    <p class="hint" id="status">Если сайт уже запущен, эта страница откроет его автоматически. Сам по себе HTML-файл не запускает приём бронирований.</p>
+  </main>
+  <script>
+    fetch('http://127.0.0.1:5173/api/health', { signal: AbortSignal.timeout(1500) })
+      .then(function (response) { return response.json(); })
+      .then(function (result) {
+        if (result.service === 'semeyniy-ezh' && result.ready) location.replace('http://127.0.0.1:5173/');
+      }).catch(function () {});
+  </script>
+</body>
+</html>
