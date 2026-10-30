@@ -1,0 +1,71 @@
+name: Published-site performance audit
+
+on:
+  push:
+    branches: [codex/render-performance-audit-20261030]
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: 7fe800bd8f74e874d2f9d49dbf4401798e53ded1
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Install isolated audit tools
+        run: |
+          mkdir -p "$RUNNER_TEMP/render-audit-tool"
+          cd "$RUNNER_TEMP/render-audit-tool"
+          npm init -y
+          npm install --no-audit --no-fund lighthouse@13.6.0 playwright@1.62.1
+          npx playwright install --with-deps chromium
+      - name: Measure three cold mobile runs for each page
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs/promises';
+          import {spawn} from 'node:child_process';
+          import {join} from 'node:path';
+          import {pathToFileURL} from 'node:url';
+          const tools=join(process.env.RUNNER_TEMP,'render-audit-tool');
+          const out=join(process.env.RUNNER_TEMP,'render-lighthouse');
+          await fs.mkdir(out,{recursive:true});
+          const {chromium}=await import(pathToFileURL(join(tools,'node_modules/playwright/index.mjs')).href);
+          const cli=join(tools,'node_modules/lighthouse/cli/index.js');
+          const rows=[];
+          for(const [name,path] of [['home','/'],['admin-login','/admin/']]){
+            for(let n=1;n<=3;n++){
+              const destination=join(out,name+'-'+n);
+              const url='https://site-test1-1.onrender.com'+path;
+              const args=[cli,url,'--only-categories=performance','--form-factor=mobile','--output=json','--output=html','--output-path='+destination,'--save-assets','--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage','--quiet'];
+              let log='';
+              const code=await new Promise((resolve,reject)=>{
+                const child=spawn(process.execPath,args,{env:{...process.env,CHROME_PATH:chromium.executablePath()}});
+                child.stdout.on('data',b=>log+=b);child.stderr.on('data',b=>log+=b);
+                child.on('error',reject);child.on('close',resolve);
+              });
+              await fs.writeFile(destination+'.log',log);
+              if(code!==0)throw Error('Lighthouse process failed: '+name+' '+n);
+              const r=JSON.parse(await fs.readFile(destination+'.report.json','utf8'));
+              const row={name,url,run:n,score:r.categories.performance.score*100,metrics:Object.fromEntries(['largest-contentful-paint','total-blocking-time','cumulative-layout-shift'].map(id=>[id,r.audits[id].numericValue])),environment:r.environment,config:r.configSettings,warnings:r.runWarnings,version:r.lighthouseVersion};
+              rows.push(row);await fs.writeFile(join(out,'lighthouse-summary.json'),JSON.stringify(rows,null,2));
+              console.log(JSON.stringify(row));
+            }
+          }
+          const medians=Object.fromEntries(['home','admin-login'].map(name=>{const scores=rows.filter(r=>r.name===name).map(r=>r.score);const sorted=[...scores].sort((a,b)=>a-b);return [name,{median:sorted[1],range:[sorted[0],sorted[2]],scores}];}));
+          await fs.writeFile(join(out,'lighthouse-medians.json'),JSON.stringify(medians,null,2));
+          console.log(JSON.stringify(medians));
+          if(Object.values(medians).some(row=>row.median<90))process.exitCode=1;
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: published-lighthouse
+          path: ${{ runner.temp }}/render-lighthouse
+          retention-days: 3
