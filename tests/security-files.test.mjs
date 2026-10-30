@@ -19,7 +19,8 @@ test('private credentials resist alternate URL representations before Vite reads
   }
   assertPrivate(await get('/private%5cadmin-access.txt', 'HEAD'), 'HEAD private credentials');
   for (const path of ['/', '/admin/', '/src/main.ts', '/shared/config.json', '/@vite/client', '/images/safe.svg', '/api/health']) {
-    assert.equal((await get(path)).status, 200, `Legitimate dev route ${path}`);
+    const response = await get(path);
+    assert.equal(response.status, 200, `Legitimate dev route ${path}: ${response.body.toString('utf8')}`);
   }
 });
 
@@ -54,7 +55,8 @@ test('Vite HTML rewrites cannot expose configured databases through shortened UR
     assertPrivate(await get(alias), alias);
     assertPrivate(await get(alias + '?visit=1'), alias + '?visit=1');
     assertPrivate(await get(alias, 'HEAD'), `HEAD ${alias}`);
-    assert.equal((await get('/admin/')).status, 200);
+    const response = await get('/admin/');
+    assert.equal(response.status, 200, `Legitimate dev admin page: ${response.body.toString('utf8')}`);
   }
 });
 
