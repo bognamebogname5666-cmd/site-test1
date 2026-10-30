@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, readdir, copyFile, writeFile, symlink, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, readdir, copyFile, writeFile, symlink, rm, realpath } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve, dirname, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -11,7 +11,10 @@ export const secretMarker = 'SYNTHETIC-SECURITY-FIXTURE-NOT-A-REAL-PASSWORD';
 // Copy the real server into a disposable project so Vite never loads local .env
 // files or exposes the working project's files during hostile-path tests.
 export async function securityFixture(t, { dev = true, databaseName = 'private/bookings.bin' } = {}) {
-  const directory = await mkdtemp(join(tmpdir(), 'ezh-security-test-'));
+  // Windows CI can expose TEMP through an 8.3 alias such as RUNNER~1.
+  // Vite rejects tilde paths; expand the existing parent before creating files.
+  const temporaryRoot = await realpath(tmpdir());
+  const directory = await mkdtemp(join(temporaryRoot, 'ezh-security-test-'));
   const root = join(directory, 'site');
   let app;
   t.after(async () => {
@@ -20,7 +23,7 @@ export async function securityFixture(t, { dev = true, databaseName = 'private/b
       await new Promise(resolve => app.server.close(resolve));
       await app.vite?.close(); app.store.close();
     }
-    assert.ok(resolve(directory).startsWith(resolve(tmpdir()) + sep));
+    assert.ok(resolve(directory).startsWith(temporaryRoot + sep));
     await rm(directory, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   });
   for (const name of ['server', 'shared', 'src', 'admin', 'public/images', 'dist/admin', 'dist/assets']) await mkdir(join(root, name), { recursive: true });
