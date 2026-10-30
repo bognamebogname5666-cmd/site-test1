@@ -25,7 +25,7 @@ const projectRoot = fileURLToPath(new URL('../', import.meta.url));
  * @property {import('./telegram.mjs').TelegramOptions | null} [telegram] Null disables new notification delivery.
  * @property {boolean} [dev] Serve through Vite middleware.
  * @property {boolean} [hmr] Enable Vite's live-update websocket in development.
- * @property {boolean} [adminCookieSecure] Require HTTPS Origin and Secure admin cookies behind TLS.
+ * @property {boolean} [adminCookieSecure] Require HTTPS Origin, Secure admin cookies and production HSTS behind TLS.
  */
 /** @param {AppOptions} [options] */
 export async function createApp({ databasePath = process.env.DATABASE_PATH || resolve(projectRoot, 'data/bookings.sqlite'), now = () => new Date(), rateLimit = 5, trustedProxies = process.env.TRUSTED_PROXIES || '', telegram = { token: process.env.TELEGRAM_BOT_TOKEN, chatId: process.env.TELEGRAM_CHAT_ID }, dev = false, hmr = true, adminCookieSecure = process.env.ADMIN_COOKIE_SECURE === 'true' } = {}) {
@@ -80,6 +80,8 @@ export async function createApp({ databasePath = process.env.DATABASE_PATH || re
   }
 
   const server = createServer(async (req, res) => {
+    // HTTPS is explicitly configured by the operator; never trust forwarded protocol here.
+    if (!dev && adminCookieSecure) res.setHeader('Strict-Transport-Security', 'max-age=31536000');
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
     res.setHeader('X-Frame-Options', 'DENY');

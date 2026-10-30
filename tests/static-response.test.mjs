@@ -7,9 +7,9 @@ import { request } from 'node:http';
 import { brotliDecompressSync, gunzipSync } from 'node:zlib';
 import { createApp } from '../server/index.mjs';
 
-async function fixture(t) {
+async function fixture(t, options = {}) {
   const directory = await mkdtemp(join(tmpdir(), 'ezh-static-'));
-  const app = await createApp({ databasePath: join(directory, 'test.sqlite'), telegram: null, trustedProxies: [] });
+  const app = await createApp({ databasePath: join(directory, 'test.sqlite'), telegram: null, trustedProxies: [], ...options });
   await new Promise(resolve => app.server.listen(0, '127.0.0.1', resolve));
   t.after(async () => {
     app.server.closeAllConnections();
@@ -41,6 +41,17 @@ test('static HTML negotiates Brotli and gzip without changing its content', asyn
   assert.equal((await get('/', { 'Accept-Encoding': 'br;q=0, gzip;q=0' })).headers['content-encoding'], undefined);
   assert.equal((await get('/', { 'Accept-Encoding': 'br;q=.5, gzip;q=1' })).headers['content-encoding'], 'gzip');
   assert.equal((await get('/', { 'Accept-Encoding': '*;q=0' })).status, 406);
+});
+
+test('explicit HTTPS configuration advertises host-only HSTS on every response', async t => {
+  const secure = await fixture(t, { adminCookieSecure: true });
+  for (const path of ['/', '/admin/', '/api/health', '/missing-hsts-page', '/api/admin/bookings']) {
+    const response = await secure.get(path);
+    assert.equal(response.headers['strict-transport-security'], 'max-age=31536000', path);
+  }
+  const local = await fixture(t, { adminCookieSecure: false });
+  const response = await local.get('/', { 'X-Forwarded-Proto': 'https' });
+  assert.equal(response.headers['strict-transport-security'], undefined, 'Untrusted forwarding cannot enable HSTS');
 });
 
 test('unchanged resources revalidate with ETag and Last-Modified while private API stays uncached', async t => {
