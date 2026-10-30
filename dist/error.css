@@ -1,0 +1,15 @@
+:root { color: #58332c; background: #f8f3e9; font: 17px/1.6 Arial, Helvetica, sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { width: min(640px, calc(100% - 40px)); margin: 0 auto; padding: 48px 0 64px; }
+.brand { font: bold 17px Georgia, serif; letter-spacing: .06em; }
+img { display: block; margin: 64px 0 28px; }
+.eyebrow { font-size: 13px; letter-spacing: .06em; }
+h1 { font: 400 clamp(38px, 7vw, 56px)/1.12 Georgia, serif; margin: 16px 0 24px; }
+p { max-width: 520px; }
+a { color: inherit; text-underline-offset: 5px; }
+nav { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 32px; }
+nav a { display: inline-flex; min-height: 48px; align-items: center; }
+.button { padding: 10px 22px; border-radius: 6px; background: #58332c; color: #fffaf2; text-decoration: none; }
+:focus-visible { outline: 3px solid #9a5424; outline-offset: 5px; }
+@media (max-width: 480px) { main { padding-top: 28px; } img { margin-top: 40px; } }

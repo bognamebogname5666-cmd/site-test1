@@ -1,0 +1,16 @@
+{
+  "name": "Семейный Ёж",
+  "city": "Москва",
+  "address": "ул. Покровка, 27",
+  "phone": "+7 (495) 000-00-27",
+  "phoneHref": "+74950000027",
+  "email": "hello@semeyniy-ezh.example",
+  "timezone": "Europe/Moscow",
+  "openHour": 8,
+  "closeHour": 22,
+  "maxGuests": 6,
+  "maxDaysAhead": 60,
+  "fictionalBusiness": true,
+  "mapEmbed": "https://maps.google.com/maps?q=Москва,+Покровка,+27&t=&z=16&ie=UTF8&iwloc=&output=embed",
+  "directionsUrl": "https://yandex.ru/maps/?text=Москва%2C%20улица%20Покровка%2C%2027&mode=routes"
+}
